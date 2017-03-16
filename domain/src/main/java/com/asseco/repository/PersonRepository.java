@@ -13,14 +13,12 @@ import com.asseco.repository.PersonRepositoryInterface.PersonNotFoundException;
 public class PersonRepository implements PersonRepositoryInterface {
 
 	public ArrayList<PersonInterface> collectionPersonsArrayList;
-	//public SortedSet<Person> collectionPersonsSortedSet;
 	public SortedSet<PersonInterface> collectionPersonsSortedSet;
 	public Map<Long, PersonInterface> collectionPersonsMap;
 
 	public PersonRepository() {
 		//ró¿ne struktury repozytorium Person do ró¿nych metod wydajnego wyszukiwania 
 		this.collectionPersonsArrayList = new ArrayList<PersonInterface>();
-		//this.collectionPersonsSortedSet = new TreeSet<Person>();
 		this.collectionPersonsSortedSet = new TreeSet<PersonInterface>();
 		this.collectionPersonsMap = new HashMap<Long, PersonInterface>();
 	}
@@ -42,7 +40,6 @@ public class PersonRepository implements PersonRepositoryInterface {
 	@Override
 	public PersonInterface save(PersonInterface person) {
 		collectionPersonsArrayList.add(person);
-		//??? collectionPersonsSortedSet.add((Person)person);
 		collectionPersonsSortedSet.add(person);
 		collectionPersonsMap.put(person.getId(), person);
 		return person;
@@ -50,13 +47,8 @@ public class PersonRepository implements PersonRepositoryInterface {
 	
 	@Override
 	public PersonInterface update(PersonInterface person) {
-		/*
-		 * collectionPersons.remove(findOne(person.getId()));
-		 * collectionPersons.add(person);
-		 */
 		collectionPersonsArrayList.remove(findOne(person.getId()));
 		collectionPersonsArrayList.add(person.getId().intValue() - 1, person);
-
 		return person;
 	}
 
@@ -78,17 +70,12 @@ public class PersonRepository implements PersonRepositoryInterface {
 	@Override
 	public Collection<PersonInterface> findBySurnameBetweenOrderBySurname(String fromSurname, String endSurname) {
 		// TODO Auto-generated method stub
-
-		System.out.println(
-				"findBySurnameBetweenOrderBySurname collectionPersons.size()=" + collectionPersonsArrayList.size());
 		Collection<PersonInterface> result = new ArrayList<PersonInterface>();
 		for (PersonInterface person : collectionPersonsArrayList) {
 			if (fromSurname.equals(person.getName()) && endSurname.equals(person.getSurname()))
 				result.add(person);
 		}
-		System.out.println("findBySurnameBetweenOrderBySurname result.size()=" + result.size());
 		return result;
-
 	}
 
 	@Override

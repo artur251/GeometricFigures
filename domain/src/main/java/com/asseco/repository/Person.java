@@ -11,9 +11,6 @@ public class Person implements PersonInterface, Comparable<Person> {
 	Date birthDate;
 	Date creationDate;
 
-	private String sName;
-	private String sSurname;
-
 	// konstruktory
 /*	private Person() {
 		// prevent external instantiation
@@ -70,22 +67,6 @@ public class Person implements PersonInterface, Comparable<Person> {
 		this.creationDate = creationDate;
 	}
 
-	public String getsName() {
-		return sName;
-	}
-
-	public void setsName(String sName) {
-		this.sName = sName;
-	}
-
-	public String getsSurname() {
-		return sSurname;
-	}
-
-	public void setsSurname(String sSurname) {
-		this.sSurname = sSurname;
-	}
-	
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate
@@ -94,21 +75,19 @@ public class Person implements PersonInterface, Comparable<Person> {
 
 	@Override
 	//https://blog.udemy.com/java-collections-sort/
-	public int compareTo(Person p) {
-		String thisSurname;
-		String oSurname;
-		if (this.sSurname != null) {
-			thisSurname = this.sSurname + "_" + id;
+	public int compareTo(Person person) {
+		String surnameTemp;
+		String surnameObject;
+		if (this.surname != null) {
+			surnameTemp = this.surname + "_" + id;
 		} else {
-			thisSurname = "_" + id;
+			surnameTemp = "_" + id;
 		}
-		if (p.getsSurname() != null) {
-			oSurname = p.getsSurname() + "_" + p.getId();
+		if (person.getSurname() != null) {
+			surnameObject = person.getSurname() + "_" + person.getId();
 		} else {
-			oSurname = "_" + p.getId();
+			surnameObject = "_" + person.getId();
 		}
-		return thisSurname.compareTo(oSurname);
+		return surnameTemp.compareTo(surnameObject);
 	}
-
-
 }
